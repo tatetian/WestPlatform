@@ -9,7 +9,10 @@ class ganglia::gmetad {
     content => template('ganglia/gmetad.conf.erb'),
     notify => Service['gmetad']
   }
+
   service {'gmetad':
-    ensure => running
+    ensure => running,
+    enable => true,
+    require => [ Package['gmetad'], File['/etc/ganglia/gmetad.conf']]
   }
 }

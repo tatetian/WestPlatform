@@ -7,6 +7,8 @@ class ganglia::gmond {
     notify => Service['ganglia-monitor']
   }
   service {'ganglia-monitor':
-    ensure => running
+    ensure => running,
+    enable => true,
+    require => [ Package['ganglia-monitor'], File['/etc/ganglia/gmond.conf']]
   }
 }

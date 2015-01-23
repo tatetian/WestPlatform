@@ -1,3 +1,5 @@
-class {'ganglia':
-   mod => 'master'
+node 'ganglia-master' {
+  class {'ganglia':
+    mod => 'master'
+  }
 }
