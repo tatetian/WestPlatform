@@ -1,3 +1,3 @@
 class {'ganglia':
-   mod => '1'
+   mod => 'slave'
 }

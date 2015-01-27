@@ -1,9 +1,9 @@
-class ganglia($mod='0'){
+class ganglia($mod='slave'){
   case $mod{
-    0:{
+    'slave':{
       include ganglia::gmond
     }
-    1:{
+    'master':{
       include ganglia::gmond
       include ganglia::gmetad
       include ganglia::gweb
