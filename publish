@@ -1,0 +1,12 @@
+#!/bin/sh
+
+project=WestPlatform.git
+
+dir=`dirname $0`
+absolute_dir=`realpath $dir`
+echo $absolute_dir
+
+echo 'Clone git repository...'
+sudo rm -rf /var/git/$project
+cd /var/git
+sudo git clone --bare $absolute_dir

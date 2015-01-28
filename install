@@ -1,0 +1,17 @@
+#!/bin/sh
+
+dir=`dirname $0`
+dir=`realpath $dir`
+git_home=/var/git
+
+echo 'Install packages...'
+sudo apt-get install puppet realpath
+
+echo 'Create user git...'
+sudo rm -rf $git_home
+sudo mkdir $git_home
+sudo useradd -d $git_home git
+
+echo 'Config ssh for user git..'
+sudo cp -r $dir/ssh $git_home/.ssh
+sudo chown git:git $git_home -R
