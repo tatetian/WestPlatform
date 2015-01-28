@@ -10,3 +10,5 @@ echo 'Clone git repository...'
 sudo rm -rf /var/git/$project
 cd /var/git
 sudo git clone --bare $absolute_dir
+sudo chown git:git $project -R
+

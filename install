@@ -1,11 +1,10 @@
 #!/bin/sh
-
-dir=`dirname $0`
-dir=`realpath $dir`
-git_home=/var/git
-
 echo 'Install packages...'
 sudo apt-get install puppet realpath
+
+dir=`dirname $0`
+git_home=/var/git
+dir=`realpath $dir`
 
 echo 'Create user git...'
 sudo rm -rf $git_home
