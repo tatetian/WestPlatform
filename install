@@ -14,3 +14,4 @@ sudo useradd -d $git_home git
 echo 'Config ssh for user git..'
 sudo cp -r $dir/ssh $git_home/.ssh
 sudo chown git:git $git_home -R
+sudo chmod 400 $git_home/.ssh/id_rsa
