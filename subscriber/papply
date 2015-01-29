@@ -1,0 +1,3 @@
+#!/bin/sh
+PUPPETDIR=/var/git/WestPlatform.git
+/usr/bin/puppet apply --modulepath ${PUPPETDIR}/modules ${PUPPETDIR}/manifests/site.pp
