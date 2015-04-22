@@ -4,8 +4,8 @@ $h_group = 'hadoop'
 $h_user = 'hadoop'
 $h_base = "/home/$h_user"
 $h_master = 'hadoop-master'
-$h_slaves = ['hadoop-slave3']
-$h_hosts = "172.16.0.64 hadoop-master\n172.16.0.48 hadoop-slave1\n172.16.0.56 hadoop-slave2\n172.16.0.65 hadoop-slave3\n"
+$h_slaves = ['hadoop-slave1']
+$h_hosts = "172.16.0.64 hadoop-master\n172.16.0.48 hadoop-slave1\n"
 
 #spark params
 $sc_version = '2.10.4'
@@ -21,6 +21,12 @@ node 'hadoop-master' {
     hadoop_master => $h_master,
     hadoop_slaves => $h_slaves,
     hosts => $h_hosts,    
+  }
+
+  class { 'hadoop::cluster':
+    hadoop_user => $h_user,
+    hadoop_base => $h_base,
+    hadoop_version => $h_version,
   }
 
   class { 'spark':
