@@ -102,7 +102,7 @@ class hadoop ($hadoop_version, $hadoop_group, $hadoop_user, $hadoop_base, $hadoo
     owner => "$hadoop_user",
     group => "$hadoop_group",
     mode => 0664,
-    source => "/home/ubuntu/hadoop-$hadoop_version.tar.gz",
+    source => "/opt/WestPlatform/resources/hadoop-$hadoop_version.tar.gz",
     alias => 'hadoop-source-tgz',
     before => Exec['untar-hadoop'],
     require => File['hadoop-base'],

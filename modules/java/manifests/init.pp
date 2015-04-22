@@ -15,7 +15,7 @@ class java {
     mode => 0664,
     owner => 'root',
     group => 'root',
-    source => "/home/ubuntu/jdk${java::params::java_version}.tar.gz",
+    source => "/opt/WestPlatform/resources/jdk${java::params::java_version}.tar.gz",
     alias => 'java-source-tgz',
     require => File['java-base'],
     before => Exec['untar-java'],
