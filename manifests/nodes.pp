@@ -5,7 +5,7 @@ $h_user = 'hadoop'
 $h_base = "/home/$h_user"
 $h_master = 'hadoop-master'
 $h_slaves = ['hadoop-slave1']
-$h_hosts = "172.16.0.121 hadoop-master\n172.16.0.48 hadoop-slave1"
+$h_hosts = "172.16.0.119 hadoop-master\n172.16.0.48 hadoop-slave1"
 
 #spark params
 $sc_version = '2.10.4'
