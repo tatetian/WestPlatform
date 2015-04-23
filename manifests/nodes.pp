@@ -1,17 +1,61 @@
-node 'tian-PC' {
-    $site_domain = 'tian-PC.example.com'
-    
-    nginx::website { 'my-pc':
-        site_domain => 'tian-PC.example.com',
-    }
-    
-    exec { 'retrieve home page':
-        command => "wget -o stdout http://$site_domain > /dev/null",
-        path => ['/bin', '/usr/bin'],
-    }
+#hadoop params
+$h_version = '2.2.0'
+$h_group = 'hadoop'
+$h_user = 'hadoop'
+$h_base = "/home/$h_user"
+$h_master = 'hadoop-master'
+$h_slaves = ['hadoop-slave1']
+$h_hosts = "172.16.0.64 hadoop-master\n172.16.0.48 hadoop-slave1\n"
 
-    class { 'ntp':
-        server => 'us.pool.ntp.org',
-    }
+#spark params
+$sc_version = '2.10.4'
+$sp_version = '1.0.0-bin-hadoop2'
+$sp_slaves = $h_slaves
+
+node 'hadoop-master' {
+  class { 'hadoop':
+    hadoop_version => $h_version,
+    hadoop_group => $h_group,
+    hadoop_user => $h_user,
+    hadoop_base => $h_base,
+    hadoop_master => $h_master,
+    hadoop_slaves => $h_slaves,
+    hosts => $h_hosts,    
+  }
+
+  class { 'hadoop::cluster':
+    hadoop_user => $h_user,
+    hadoop_base => $h_base,
+    hadoop_version => $h_version,
+  }
+
+  class { 'spark':
+    hadoop_user => $h_user,
+    hadoop_group => $h_group,
+    hadoop_base => $h_base,
+    scala_version => $sc_version,
+    spark_version => $sp_version,
+    spark_slaves => $sp_slaves,
+  }
 }
 
+node /hadoop-slave\d*/ {
+  class { 'hadoop':
+    hadoop_version => $h_version,
+    hadoop_group => $h_group,
+    hadoop_user => $h_user,
+    hadoop_base => $h_base,
+    hadoop_master => $h_master,
+    hadoop_slaves => $h_slaves,
+    hosts => $h_hosts,
+  }
+
+  class { 'spark':
+    hadoop_user => $h_user,
+    hadoop_group => $h_group,
+    hadoop_base => $h_base,
+    scala_version => $sc_version,
+    spark_version => $sp_version,
+    spark_slaves => $sp_slaves,
+  }
+}

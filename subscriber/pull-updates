@@ -1,0 +1,7 @@
+#!/bin/sh
+PUPPETDIR=/var/git/WestPlatform.git
+if [ ! -d "$PUPPETDIR" ]; then
+	exit
+fi
+cd ${PUPPETDIR}
+git pull && sudo /usr/local/bin/papply
