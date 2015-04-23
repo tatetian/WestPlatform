@@ -1,3 +1,0 @@
-class {'ganglia':
-   mod => 'slave'
-}
